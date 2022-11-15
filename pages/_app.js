@@ -41,6 +41,7 @@ function Root({ Component, pageProps }) {
         <ThemeProvider theme={theme[contexto.mode]}>
             <CSSReset />
             <Component {...pageProps} />
+            <RegisterVideo />
         </ThemeProvider>
        
     )

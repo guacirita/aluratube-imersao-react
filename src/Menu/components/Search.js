@@ -1,4 +1,5 @@
 import React from "react";
+import { FiSearch } from 'react-icons/fi';
 import styled from "styled-components"
 
 const StyledSearch = styled.div`
@@ -7,12 +8,13 @@ const StyledSearch = styled.div`
   border: 1px solid ${({ theme }) => theme.borderBase};
   max-width: 425px;
   width: 100%;
-  border-radius: 2px;
+  border-radius: 50px;
   overflow: hidden;
+  justify-content: space-between;
   
   input {
     width: 80%;
-    padding: 4px 6px;
+    padding: 6px 20px;
     border: none;
     outline: none;
     color: ${({ theme }) => theme.textColorBase};
@@ -34,6 +36,10 @@ const StyledSearch = styled.div`
   }
 `;
 
+const StyledIconSearch = styled(FiSearch)`
+  color: ${({ theme }) => theme.textColorBase};
+`;
+
 // Home 
 // Menu
 // Search
@@ -45,11 +51,12 @@ export default function Search({ valorDoFiltro, setValorDoFiltro }) {
     const valorDaBusca = valorDoFiltro;
     const setValorDaBusca = setValorDoFiltro;
 
+
     return (
         <StyledSearch>
             <input type="text" onChange={(e) => setValorDaBusca(e.target.value)} value={valorDaBusca} />
             <button>
-                🔎
+            <StyledIconSearch size={28} />
             </button>
         </StyledSearch>
     )

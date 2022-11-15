@@ -18,8 +18,9 @@ function HomePage() {
                 console.log(dados.data);
                 // Forma imutavel
                 const novasPlaylists = {};
-                dados.data.forEach((video) => {
-                    if (!novasPlaylists[video.playlist]) novasPlaylists[video.playlist] = [];
+                dados?.data?.forEach((video) => {
+                    if (!novasPlaylists[video.playlist]); 
+                    novasPlaylists[video.playlist] = [];
                     novasPlaylists[video.playlist].push(video);
 
                 });
@@ -38,8 +39,7 @@ function HomePage() {
                 {/* Prop Drilling */}
                 <Menu valorDoFiltro={valorDoFiltro} setValorDoFiltro={setValorDoFiltro} />
                 <Header />
-                <Timeline searchValue={valorDoFiltro} playlists={playlists}>
-                    Conteúdo
+                <Timeline searchValue={valorDoFiltro} playlists={config.playlists}>
                 </Timeline>
             </div>
         </>
@@ -47,14 +47,6 @@ function HomePage() {
 }
 
 export default HomePage
-
-// function Menu() {
-//     return (
-//         <div>
-//             Menu
-//         </div>
-//     )
-// }
 
 
 const StyledHeader = styled.div`
@@ -76,9 +68,12 @@ const StyledBanner = styled.div`
     background-color: blue;
     background-image: url(${({ bg }) => bg});
     /* background-image: url(${config.bg}); outra forma de escrever o codigo */
-    height: 230px;
+    height: 260px;
+    width: 100%;
+    background-size: cover;
+    background-position-y: -50px;
 `;
-function Header() {
+function Header(props) {
     return (
         <StyledHeader>
             <StyledBanner bg={config.bg} />
@@ -97,15 +92,15 @@ function Header() {
     )
 }
 
-function Timeline({ searchValue, ...propriedades }) {
+function Timeline({ searchValue, ...props }) {
     // console.log("Dentro do componente", propriedades.playlists);
-    const playlistNames = Object.keys(propriedades.playlists);
+    const playlistNames = Object.keys(props.playlists);
     // Statement
     // Retorno por expressão
     return (
         <StyledTimeline>
             {playlistNames.map((playlistName) => {
-                const videos = propriedades.playlists[playlistName];
+                const videos = props.playlists[playlistName];
                 // console.log(playlistName);
                 // console.log(videos);
                 return (
@@ -120,7 +115,7 @@ function Timeline({ searchValue, ...propriedades }) {
                                 })
                                 .map((video) => {
                                     return (
-                                        <a key={video.url} href={video.url}>
+                                        <a key={video.url} href={video.url} target="_blank">
                                             <img src={video.thumb} />
                                             <span>
                                                 {video.title}
